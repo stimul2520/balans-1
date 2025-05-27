@@ -99,12 +99,12 @@ listen web_tcp
 	server s2 127.0.0.1:9999 check inter 3s
 ```
 
-![1](1.png)
-![2](2.png)
-![3](3.png)
-![4](4.png)
-![5](5.png)
-![6](6.png)
+![1](img/1.png)
+![2](img/2.png)
+![3](img/3.png)
+![4](img/4.png)
+![5](img/5.png)
+![6](img/6.png)
 
 ---
 
