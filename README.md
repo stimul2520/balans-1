@@ -30,7 +30,7 @@
    - На проверку направьте конфигурационный файл haproxy, скриншоты, где видно перенаправление запросов на разные серверы при обращении к HAProxy.
 
 
-```python
+```
 global
         log /dev/log	local0
         log /dev/log	local1 notice
@@ -65,7 +65,8 @@ defaults
 	errorfile 502 /etc/haproxy/errors/502.http
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
-
+```
+```python
 listen stats # веб-страница со статистикой
         bind                    :888
         mode                    http
