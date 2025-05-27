@@ -65,8 +65,9 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-*listen stats* *# веб-страница со статистикой*
-       *bind*                   *:888*
+```python
+listen stats # веб-страница со статистикой
+        bind                    :888
         mode                    http
         stats                   enable
         stats uri               /stats
