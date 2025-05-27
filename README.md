@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "`Название занятия`" - Tarkov Viktor
+# Домашнее задание к занятию "Кластеризация и балансировка нагрузки" - Tarkov Viktor
 
 
 ### Инструкция по выполнению домашнего задания
@@ -29,7 +29,7 @@
    - Настройте балансировку Round-robin на 4 уровне.
    - На проверку направьте конфигурационный файл haproxy, скриншоты, где видно перенаправление запросов на разные серверы при обращении к HAProxy.
 
-global
+`global`
 	log /dev/log	local0
 	log /dev/log	local1 notice
 	chroot /var/lib/haproxy
@@ -48,7 +48,7 @@ global
         ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
         ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
 
-defaults
+`defaults`
 	log	global
 	mode	http
 	option	httplog
@@ -64,7 +64,7 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-listen stats  # веб-страница со статистикой
+`listen stats  # веб-страница со статистикой`
         bind                    :888
         mode                    http
         stats                   enable
@@ -72,12 +72,12 @@ listen stats  # веб-страница со статистикой
         stats refresh           5s
         stats realm             Haproxy\ Statistics
 
-frontend example  # секция фронтенд
+`frontend example  # секция фронтенд`
         mode http
         bind :8088
         default_backend web_servers
 
-backend web_servers    # секция бэкенд
+`backend web_servers    # секция бэкенд`
         mode http
         balance roundrobin
         option httpchk
@@ -86,7 +86,7 @@ backend web_servers    # секция бэкенд
         server s2 127.0.0.1:9999 check
 
 
-listen web_tcp
+`listen web_tcp`
 
 	bind :1325
 
