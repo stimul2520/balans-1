@@ -184,6 +184,6 @@ backend web_servers    # секция бэкенд
 ![55](img/55.png)
 ![66](img/66.png) 
 ![77](img/77.png) 
-![88](img/88.png) 
+![88](img/99.png) 
 
 ---
