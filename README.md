@@ -30,8 +30,7 @@
    - На проверку направьте конфигурационный файл haproxy, скриншоты, где видно перенаправление запросов на разные серверы при обращении к HAProxy.
 
 
-\```
-global
+```global
         log /dev/log	local0
         log /dev/log	local1 notice
         chroot /var/lib/haproxy
@@ -40,19 +39,16 @@ global
 	user haproxy
 	group haproxy
 	daemon
-\```
-\```
+
 	# Default SSL material locations
 	ca-base /etc/ssl/certs
 	crt-base /etc/ssl/private
-\```
-\```
+
 	# See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
         ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
         ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
         ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
-\```
-\```
+
 defaults
 	log	global
 	mode	http
@@ -68,8 +64,7 @@ defaults
 	errorfile 502 /etc/haproxy/errors/502.http
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
-\```
-\```
+
 listen stats  # веб-страница со статистикой
         bind                    :888
         mode                    http
@@ -77,14 +72,12 @@ listen stats  # веб-страница со статистикой
         stats uri               /stats
         stats refresh           5s
         stats realm             Haproxy\ Statistics
-\```
-\```
+
 frontend example  # секция фронтенд
         mode http
         bind :8088
         default_backend web_servers
-\```
-\```
+
 backend web_servers    # секция бэкенд
         mode http
         balance roundrobin
@@ -92,15 +85,14 @@ backend web_servers    # секция бэкенд
         http-check send meth GET uri /index.html
         server s1 127.0.0.1:8888 check
         server s2 127.0.0.1:9999 check
-\```
-\```
+
 listen web_tcp
 
 	bind :1325
 
 	server s1 127.0.0.1:8888 check inter 3s
 	server s2 127.0.0.1:9999 check inter 3s
-\```
+```
 
 ![Название скриншота 1](ссылка на скриншот 1)
 
