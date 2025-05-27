@@ -29,10 +29,11 @@
    - Настройте балансировку Round-robin на 4 уровне.
    - На проверку направьте конфигурационный файл haproxy, скриншоты, где видно перенаправление запросов на разные серверы при обращении к HAProxy.
 
-`global`
- 	`log /dev/log	local0`
-	`log /dev/log	local1 notice`
-	`chroot /var/lib/haproxy`
+\```
+global
+        log /dev/log	local0
+        log /dev/log	local1 notice
+        chroot /var/lib/haproxy
 	stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
 	stats timeout 30s
 	user haproxy
@@ -48,7 +49,7 @@
         ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
         ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
 
-`defaults`
+defaults
 	log	global
 	mode	http
 	option	httplog
@@ -64,7 +65,7 @@
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-`listen stats  # веб-страница со статистикой`
+listen stats  # веб-страница со статистикой
         bind                    :888
         mode                    http
         stats                   enable
@@ -72,12 +73,12 @@
         stats refresh           5s
         stats realm             Haproxy\ Statistics
 
-`frontend example  # секция фронтенд`
+frontend example  # секция фронтенд
         mode http
         bind :8088
         default_backend web_servers
 
-`backend web_servers    # секция бэкенд`
+backend web_servers    # секция бэкенд
         mode http
         balance roundrobin
         option httpchk
@@ -86,14 +87,15 @@
         server s2 127.0.0.1:9999 check
 
 
-`listen web_tcp`
+listen web_tcp
 
 	bind :1325
 
 	server s1 127.0.0.1:8888 check inter 3s
 	server s2 127.0.0.1:9999 check inter 3s
+\```
 
-![Название скриншота 1](ссылка на скриншот 1)`
+![Название скриншота 1](ссылка на скриншот 1)
 
 
 ---
